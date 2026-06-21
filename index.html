@@ -17,7 +17,8 @@ font-family:'Segoe UI',sans-serif;
 
 body{
 background:#000;
-overflow:hidden;
+overflow-x:hidden;
+overflow-y:auto;
 color:white;
 }
 
@@ -87,7 +88,7 @@ opacity:0;
 .container{
 position:relative;
 z-index:5;
-height:100vh;
+min-height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -104,11 +105,11 @@ text-shadow:0 0 15px #ff7bd5;
 }
 
 .photo{
-width:320px;
+width:420px;
 max-width:90%;
 border-radius:25px;
-margin:15px 0;
-box-shadow:0 0 30px rgba(255,120,200,.6);
+margin:20px 0;
+box-shadow:0 0 40px rgba(255,120,200,.7);
 animation:photoFloat 4s ease-in-out infinite;
 }
 
@@ -219,7 +220,7 @@ Mi skin favorita siempre será la que está a tu lado 💗
 <div id="counter"></div>
 
 <button onclick="playMusic()">
-🎵 Nuestra canción
+🎵 Dale play a nuestra canción 💗
 </button>
 
 <div style="margin-top:10px;">
@@ -443,7 +444,7 @@ document.getElementById("finalMessage")
 
 <br><br>
 
-22 de mayo ❤️ 22 de junio
+📅 22 de mayo ❤️ 22 de junio
 
 <br><br>
 
@@ -451,23 +452,51 @@ Gracias por este primer mes.
 
 <br><br>
 
-Por cada risa.
+Gracias por cada mensaje.
+
 <br>
-Por cada mensaje.
+
+Gracias por cada llamada.
+
 <br>
-Por cada momento juntos.
+
+Gracias por cada partida.
+
+<br>
+
+Gracias por cada momento juntos.
 
 <br><br>
 
-Y si tuviera que elegir otra vez...
+Tal vez sea solo un mes...
 
 <br><br>
 
-❤️ Te volvería a elegir a ti ❤️
+Pero ha sido uno de los meses más bonitos de mi vida. ❤️
 
 <br><br>
 
-🌌 Feliz primer mes, amorcito 🌌
+Y si pudiera volver al día en que empezamos...
+
+<br><br>
+
+Te elegiría otra vez.
+
+<br>
+
+Y otra vez.
+
+<br>
+
+Y todas las veces que hiciera falta. 💕
+
+<br><br>
+
+🌌 Feliz primer mes, mi amorcito 🌌
+
+<br><br>
+
+💌 Te amo muchísimo 💌
 `;
 
 for(let i=0;i<100;i++){
