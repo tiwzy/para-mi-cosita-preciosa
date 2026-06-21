@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Mi Cosita Preciosa ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    overflow:hidden;
+    background: radial-gradient(circle at center, #2a0845 0%, #120024 50%, #000 100%);
+    height:100vh;
+    color:white;
+}
+
+.stars{
+    position:fixed;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+    0%{opacity:0.2;}
+    50%{opacity:1;}
+    100%{opacity:0.2;}
+}
+
+.container{
+    position:relative;
+    z-index:10;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+h1{
+    font-size:3rem;
+    margin-bottom:20px;
+    color:#ffd6f5;
+}
+
+#message{
+    font-size:1.4rem;
+    max-width:800px;
+    min-height:120px;
+    margin-bottom:25px;
+    transition:0.5s;
+}
+
+.counter{
+    font-size:1.2rem;
+    margin-bottom:20px;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:1rem;
+    background:#ff5fa2;
+    color:white;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.heart{
+    font-size:2rem;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+    100%{transform:scale(1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="container">
+
+<h1>Para Mi Cosita Preciosa ❤️</h1>
+
+<div class="heart">💗</div>
+
+<div class="counter" id="counter"></div>
+
+<div id="message">
+Presiona el botón, amorcito ❤️
+</div>
+
+<button onclick="nextMessage()">Leer ❤️</button>
+
+</div>
+
+<script>
+
+// ESTRELLAS
+
+for(let i=0;i<250;i++){
+
+    let star=document.createElement("div");
+    star.classList.add("star");
+
+    star.style.left=Math.random()*100+"%";
+    star.style.top=Math.random()*100+"%";
+
+    star.style.animationDuration=
+    (Math.random()*4+2)+"s";
+
+    document.querySelector(".stars").appendChild(star);
+}
+
+// MENSAJES
+
+const messages=[
+
+"Hola mi amor 💗",
+
+"Mañana cumplimos nuestro primer mes juntos 😭❤️",
+
+"Puede parecer poco tiempo...",
+
+"Pero para mí ha sido un mes lleno de momentos hermosos contigo ✨",
+
+"Gracias por cada mensaje 💌",
+
+"Gracias por cada partida 🎮",
+
+"Gracias por cada risa 😭",
+
+"Gracias por confiar en mí 💕",
+
+"Gracias por estar conmigo cuando te necesito 🥹",
+
+"Gracias por hacer mis días más felices ❤️",
+
+"Me encanta jugar contigo 🎣",
+
+"Me encanta hablar contigo 💗",
+
+"Me encanta compartir mi tiempo contigo 😭",
+
+"Y cada día encuentro más razones para amarte ❤️",
+
+"Mi lugar favorito siempre termina siendo donde estés tú 💕",
+
+"Te amo mucho mucho mucho ❤️",
+
+"Feliz primer mes, mi cosita preciosa 💗✨"
+
+];
+
+let current=0;
+
+function nextMessage(){
+
+    if(current<messages.length){
+
+        document.getElementById("message").innerHTML=
+        messages[current];
+
+        current++;
+
+    }
+
+}
+
+// CONTADOR
+
+const startDate=new Date("2025-08-22");
+
+function updateCounter(){
+
+let now=new Date();
+
+let diff=now-startDate;
+
+let days=Math.floor(diff/(1000*60*60*24));
+
+document.getElementById("counter").innerHTML=
+`❤️ Llevamos ${days} días juntos ❤️`;
+
+}
+
+updateCounter();
+
+</script>
+
+</body>
+</html>
