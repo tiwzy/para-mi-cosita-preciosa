@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -24,15 +25,15 @@ color:white;
 position:fixed;
 width:100%;
 height:100%;
+background:black;
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:2rem;
 text-align:center;
+font-size:2rem;
 padding:20px;
-background:black;
-z-index:100;
-transition:1.5s;
+z-index:999;
+transition:2s;
 }
 
 .hidden{
@@ -45,7 +46,7 @@ position:fixed;
 width:100%;
 height:100%;
 background:
-radial-gradient(circle at center,#34124d 0%,#120024 50%,#000 100%);
+radial-gradient(circle at center,#4a1768 0%,#1d0136 50%,#000 100%);
 overflow:hidden;
 }
 
@@ -60,6 +61,27 @@ animation:twinkle 3s infinite;
 0%{opacity:.2}
 50%{opacity:1}
 100%{opacity:.2}
+}
+
+.floating-heart{
+position:absolute;
+font-size:20px;
+animation:floatUp linear infinite;
+opacity:.8;
+}
+
+@keyframes floatUp{
+from{
+transform:translateY(100vh);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+to{
+transform:translateY(-120vh);
+opacity:0;
+}
 }
 
 .container{
@@ -77,66 +99,107 @@ padding:20px;
 h1{
 font-size:3rem;
 color:#ffd6f5;
-margin-bottom:20px;
+margin-bottom:15px;
+text-shadow:0 0 15px #ff7bd5;
+}
+
+.photo{
+width:320px;
+max-width:90%;
+border-radius:25px;
+margin:15px 0;
+box-shadow:0 0 30px rgba(255,120,200,.6);
+animation:photoFloat 4s ease-in-out infinite;
+}
+
+@keyframes photoFloat{
+0%,100%{
+transform:translateY(0px);
+}
+50%{
+transform:translateY(-10px);
+}
+}
+
+.caption{
+color:#ffc7ec;
+margin-bottom:15px;
+font-size:1rem;
 }
 
 #counter{
-font-size:1.2rem;
-margin-bottom:25px;
+margin-bottom:20px;
+font-size:1.1rem;
+color:#ffe3f7;
 }
 
 #message{
-font-size:1.4rem;
+font-size:1.35rem;
 max-width:800px;
-min-height:120px;
+min-height:130px;
 padding:20px;
+line-height:1.6;
 }
 
 button{
 padding:12px 28px;
 border:none;
-border-radius:25px;
+border-radius:30px;
 cursor:pointer;
 font-size:1rem;
+margin:8px;
 background:#ff4fa0;
 color:white;
+transition:.3s;
 }
 
 button:hover{
-transform:scale(1.05);
+transform:scale(1.08);
 }
 
 .heart{
 font-size:2rem;
 animation:pulse 2s infinite;
+margin-bottom:10px;
 }
 
 @keyframes pulse{
 0%{transform:scale(1)}
-50%{transform:scale(1.2)}
+50%{transform:scale(1.25)}
 100%{transform:scale(1)}
 }
 
-</style>
-</head>
-  <div style="margin-top:25px;">
-<p>🎵 Dale play antes de leer, amorcito 💗</p>
+#finalMessage{
+display:none;
+font-size:1.6rem;
+max-width:900px;
+line-height:1.8;
+padding:20px;
+color:#ffd8f3;
+animation:fadeIn 2s;
+}
 
-<iframe
-width="300"
-height="170"
-src="https://www.youtube.com/embed/FGK2KkqaHow"
-title="Golden Hour"
-frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-allowfullscreen>
-</iframe>
-</div>
-  
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+
+</head>
+
 <body>
 
 <div id="intro">
-<span id="introText">Hola cosita preciosa 💗</span>
+<div id="introText">
+Hola mami 💗
+</div>
 </div>
 
 <div id="universe">
@@ -145,17 +208,38 @@ allowfullscreen>
 
 <h1>Feliz Primer Mes ❤️</h1>
 
+<img src="skins.png" class="photo">
+
+<div class="caption">
+Mi skin favorita siempre será la que está a tu lado 💗
+</div>
+
 <div class="heart">💗</div>
 
 <div id="counter"></div>
 
-<div id="message">
-Presiona el botón, amorcito ❤️
+<button onclick="playMusic()">
+🎵 Nuestra canción
+</button>
+
+<div style="margin-top:10px;">
+<iframe id="music"
+width="0"
+height="0"
+src=""
+allow="autoplay">
+</iframe>
 </div>
 
-<button onclick="nextMessage()">
+<div id="message">
+Presiona "Leer 💕", amorcito ❤️
+</div>
+
+<button id="readBtn" onclick="nextMessage()">
 Leer 💕
 </button>
+
+<div id="finalMessage"></div>
 
 </div>
 
@@ -165,9 +249,9 @@ Leer 💕
 
 /* ESTRELLAS */
 
-for(let i=0;i<300;i++){
+for(let i=0;i<400;i++){
 
-const star=document.createElement("div");
+let star=document.createElement("div");
 
 star.className="star";
 
@@ -187,6 +271,31 @@ document.getElementById("universe")
 
 }
 
+/* CORAZONES */
+
+function createHeart(){
+
+let heart=document.createElement("div");
+
+heart.className="floating-heart";
+
+heart.innerHTML="💗";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.animationDuration=
+(Math.random()*5+5)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},10000);
+
+}
+
+setInterval(createHeart,600);
+
 /* INTRO */
 
 const introText=
@@ -199,7 +308,7 @@ introText.innerHTML=
 
 setTimeout(()=>{
 introText.innerHTML=
-"Gracias por este primer mes ❤️";
+"Gracias por este primer mes, cosita preciosa ❤️";
 },6500);
 
 setTimeout(()=>{
@@ -221,25 +330,46 @@ let diff=now-startDate;
 let days=
 Math.floor(diff/(1000*60*60*24));
 
+let hours=
+Math.floor(diff/(1000*60*60));
+
+let minutes=
+Math.floor(diff/(1000*60));
+
 document.getElementById("counter")
 .innerHTML=
-`❤️ Llevamos ${days} días juntos ❤️`;
+`
+❤️ ${days} días juntos ❤️
+<br>
+${hours} horas ❤️
+<br>
+${minutes} minutos ❤️
+`;
 
 }
 
 updateCounter();
 
+/* MUSICA */
+
+function playMusic(){
+
+document.getElementById("music").src=
+"https://www.youtube.com/embed/FGK2KkqaHow?autoplay=1";
+
+}
+
 /* MENSAJES */
 
 const messages=[
 
-"Gracias por aparecer en mi vida 💗",
+"Gracias por aparecer en mi vida, mami 💗",
 
 "Gracias por cada mensaje que me envías 😭",
 
-"Gracias por cada partida que jugamos juntos 🎮",
+"Gracias por cada partida que compartimos 🎮",
 
-"Gracias por cada regalo y cada detalle 💕",
+"Gracias por cada detalle que has tenido conmigo 💕",
 
 "Gracias por confiar en mí ❤️",
 
@@ -247,32 +377,104 @@ const messages=[
 
 "Me encanta pasar tiempo contigo 💗",
 
-"Me encanta escucharte 😭",
+"Me encanta escucharte ❤️",
 
 "Me encanta jugar contigo 🎣",
 
-"Y me encanta poder llamarte mi amor ❤️",
+"Me encanta poder llamarte mi amor 💕",
 
 "Este es solo nuestro primer mes...",
 
-"Pero espero que sea el primero de muchos más 💕",
+"Pero espero que sea el primero de muchísimos más 🌌",
 
-"Porque mi lugar favorito...",
+"Porque contigo incluso los días normales se vuelven especiales 💗",
 
-"Siempre termina siendo donde estés tú ❤️"
+"Y porque mi lugar favorito siempre termina siendo donde estés tú ❤️"
 
 ];
 
 let current=0;
 
+function typeWriter(text){
+
+let i=0;
+
+document.getElementById("message")
+.innerHTML="";
+
+let interval=setInterval(()=>{
+
+document.getElementById("message")
+.innerHTML+=text.charAt(i);
+
+i++;
+
+if(i>=text.length){
+clearInterval(interval);
+}
+
+},40);
+
+}
+
 function nextMessage(){
 
 if(current<messages.length){
 
-document.getElementById("message")
-.innerHTML=messages[current];
+typeWriter(messages[current]);
 
 current++;
+
+}else{
+
+document.getElementById("message")
+.style.display="none";
+
+document.getElementById("readBtn")
+.style.display="none";
+
+document.getElementById("finalMessage")
+.style.display="block";
+
+document.getElementById("finalMessage")
+.innerHTML=
+`
+💗 Te amo muchísimo, mi cosita preciosa 💗
+
+<br><br>
+
+22 de mayo ❤️ 22 de junio
+
+<br><br>
+
+Gracias por este primer mes.
+
+<br><br>
+
+Por cada risa.
+<br>
+Por cada mensaje.
+<br>
+Por cada momento juntos.
+
+<br><br>
+
+Y si tuviera que elegir otra vez...
+
+<br><br>
+
+❤️ Te volvería a elegir a ti ❤️
+
+<br><br>
+
+🌌 Feliz primer mes, amorcito 🌌
+`;
+
+for(let i=0;i<100;i++){
+
+setTimeout(createHeart,i*120);
+
+}
 
 }
 
