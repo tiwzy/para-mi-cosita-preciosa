@@ -8,95 +8,113 @@
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
 }
 
 body{
-    overflow:hidden;
-    background: radial-gradient(circle at center, #2a0845 0%, #120024 50%, #000 100%);
-    height:100vh;
-    color:white;
+background:#000;
+overflow:hidden;
+color:white;
 }
 
-.stars{
-    position:fixed;
-    width:100%;
-    height:100%;
-    overflow:hidden;
+#intro{
+position:fixed;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:2rem;
+text-align:center;
+padding:20px;
+background:black;
+z-index:100;
+transition:1.5s;
+}
+
+.hidden{
+opacity:0;
+pointer-events:none;
+}
+
+#universe{
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at center,#34124d 0%,#120024 50%,#000 100%);
+overflow:hidden;
 }
 
 .star{
-    position:absolute;
-    width:2px;
-    height:2px;
-    background:white;
-    border-radius:50%;
-    animation: twinkle 3s infinite;
+position:absolute;
+background:white;
+border-radius:50%;
+animation:twinkle 3s infinite;
 }
 
 @keyframes twinkle{
-    0%{opacity:0.2;}
-    50%{opacity:1;}
-    100%{opacity:0.2;}
+0%{opacity:.2}
+50%{opacity:1}
+100%{opacity:.2}
 }
 
 .container{
-    position:relative;
-    z-index:10;
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
+position:relative;
+z-index:5;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
 }
 
 h1{
-    font-size:3rem;
-    margin-bottom:20px;
-    color:#ffd6f5;
+font-size:3rem;
+color:#ffd6f5;
+margin-bottom:20px;
+}
+
+#counter{
+font-size:1.2rem;
+margin-bottom:25px;
 }
 
 #message{
-    font-size:1.4rem;
-    max-width:800px;
-    min-height:120px;
-    margin-bottom:25px;
-    transition:0.5s;
-}
-
-.counter{
-    font-size:1.2rem;
-    margin-bottom:20px;
+font-size:1.4rem;
+max-width:800px;
+min-height:120px;
+padding:20px;
 }
 
 button{
-    padding:12px 25px;
-    border:none;
-    border-radius:25px;
-    cursor:pointer;
-    font-size:1rem;
-    background:#ff5fa2;
-    color:white;
+padding:12px 28px;
+border:none;
+border-radius:25px;
+cursor:pointer;
+font-size:1rem;
+background:#ff4fa0;
+color:white;
 }
 
 button:hover{
-    transform:scale(1.05);
+transform:scale(1.05);
 }
 
 .heart{
-    font-size:2rem;
-    animation:pulse 2s infinite;
+font-size:2rem;
+animation:pulse 2s infinite;
 }
 
 @keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.2);}
-    100%{transform:scale(1);}
+0%{transform:scale(1)}
+50%{transform:scale(1.2)}
+100%{transform:scale(1)}
 }
 
 </style>
@@ -104,100 +122,82 @@ button:hover{
 
 <body>
 
-<div class="stars"></div>
+<div id="intro">
+<span id="introText">Hola cosita preciosa 💗</span>
+</div>
+
+<div id="universe">
 
 <div class="container">
 
-<h1>Para Mi Cosita Preciosa ❤️</h1>
+<h1>Feliz Primer Mes ❤️</h1>
 
 <div class="heart">💗</div>
 
-<div class="counter" id="counter"></div>
+<div id="counter"></div>
 
 <div id="message">
 Presiona el botón, amorcito ❤️
 </div>
 
-<button onclick="nextMessage()">Leer ❤️</button>
+<button onclick="nextMessage()">
+Leer 💕
+</button>
+
+</div>
 
 </div>
 
 <script>
 
-// ESTRELLAS
+/* ESTRELLAS */
 
-for(let i=0;i<250;i++){
+for(let i=0;i<300;i++){
 
-    let star=document.createElement("div");
-    star.classList.add("star");
+const star=document.createElement("div");
 
-    star.style.left=Math.random()*100+"%";
-    star.style.top=Math.random()*100+"%";
+star.className="star";
 
-    star.style.animationDuration=
-    (Math.random()*4+2)+"s";
+let size=Math.random()*3;
 
-    document.querySelector(".stars").appendChild(star);
-}
+star.style.width=size+"px";
+star.style.height=size+"px";
 
-// MENSAJES
+star.style.left=Math.random()*100+"%";
+star.style.top=Math.random()*100+"%";
 
-const messages=[
+star.style.animationDuration=
+(Math.random()*4+2)+"s";
 
-"Hola mi amor 💗",
-
-"Mañana cumplimos nuestro primer mes juntos 😭❤️",
-
-"Puede parecer poco tiempo...",
-
-"Pero para mí ha sido un mes lleno de momentos hermosos contigo ✨",
-
-"Gracias por cada mensaje 💌",
-
-"Gracias por cada partida 🎮",
-
-"Gracias por cada risa 😭",
-
-"Gracias por confiar en mí 💕",
-
-"Gracias por estar conmigo cuando te necesito 🥹",
-
-"Gracias por hacer mis días más felices ❤️",
-
-"Me encanta jugar contigo 🎣",
-
-"Me encanta hablar contigo 💗",
-
-"Me encanta compartir mi tiempo contigo 😭",
-
-"Y cada día encuentro más razones para amarte ❤️",
-
-"Mi lugar favorito siempre termina siendo donde estés tú 💕",
-
-"Te amo mucho mucho mucho ❤️",
-
-"Feliz primer mes, mi cosita preciosa 💗✨"
-
-];
-
-let current=0;
-
-function nextMessage(){
-
-    if(current<messages.length){
-
-        document.getElementById("message").innerHTML=
-        messages[current];
-
-        current++;
-
-    }
+document.getElementById("universe")
+.appendChild(star);
 
 }
 
-// CONTADOR
+/* INTRO */
 
-const startDate=new Date("2025-08-22");
+const introText=
+document.getElementById("introText");
+
+setTimeout(()=>{
+introText.innerHTML=
+"Tengo algo importante que decirte...";
+},3000);
+
+setTimeout(()=>{
+introText.innerHTML=
+"Gracias por este primer mes ❤️";
+},6500);
+
+setTimeout(()=>{
+document.getElementById("intro")
+.classList.add("hidden");
+},10000);
+
+/* CONTADOR */
+
+const startDate=
+new Date("2026-05-22");
 
 function updateCounter(){
 
@@ -205,14 +205,65 @@ let now=new Date();
 
 let diff=now-startDate;
 
-let days=Math.floor(diff/(1000*60*60*24));
+let days=
+Math.floor(diff/(1000*60*60*24));
 
-document.getElementById("counter").innerHTML=
+document.getElementById("counter")
+.innerHTML=
 `❤️ Llevamos ${days} días juntos ❤️`;
 
 }
 
 updateCounter();
+
+/* MENSAJES */
+
+const messages=[
+
+"Gracias por aparecer en mi vida 💗",
+
+"Gracias por cada mensaje que me envías 😭",
+
+"Gracias por cada partida que jugamos juntos 🎮",
+
+"Gracias por cada regalo y cada detalle 💕",
+
+"Gracias por confiar en mí ❤️",
+
+"Gracias por hacerme sentir querido 🥹",
+
+"Me encanta pasar tiempo contigo 💗",
+
+"Me encanta escucharte 😭",
+
+"Me encanta jugar contigo 🎣",
+
+"Y me encanta poder llamarte mi amor ❤️",
+
+"Este es solo nuestro primer mes...",
+
+"Pero espero que sea el primero de muchos más 💕",
+
+"Porque mi lugar favorito...",
+
+"Siempre termina siendo donde estés tú ❤️"
+
+];
+
+let current=0;
+
+function nextMessage(){
+
+if(current<messages.length){
+
+document.getElementById("message")
+.innerHTML=messages[current];
+
+current++;
+
+}
+
+}
 
 </script>
 
